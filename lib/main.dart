@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:task2/screens/home_screen.dart';
+import 'package:task2/screens/product_sreen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -16,7 +17,10 @@ class Task2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      routes: {
+        "/": (context) => const HomeScreen(),
+        "/productscreen": (context) => const ProductScreen()
+      },
     );
   }
 }
