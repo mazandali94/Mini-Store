@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:task2/widgets/app_bar.dart';
@@ -17,7 +18,7 @@ final List<Map> cardlist2 = [
     "Price": "3000"
   },
   {
-    "imagelink": "assets/images/image_3.jpg",
+    "imagelink": "assets/images/image_3.png",
     "productname": "Product_3",
     "productdetails": "Details_3",
     "Price": "4000"
@@ -35,9 +36,43 @@ final List<Map> cardlist2 = [
     "Price": "6000"
   }
 ];
+List<Widget> staggeredList = [];
+List<StaggeredTile> staggeredTile = [];
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  List<Widget> buildStaggered(BuildContext context) {
+    staggeredList.add(
+      const Padding(
+        padding: EdgeInsets.all(15),
+        child: Text(
+          "Found 10 Results",
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+    staggeredTile.add(const StaggeredTile.fit(2));
+    for (var element in cardlist2) {
+      staggeredTile.add(const StaggeredTile.fit(2));
+      staggeredList.add(
+        InkWell(
+          onTap: () => Navigator.pushNamed(
+            context,
+            "/productscreen",
+            arguments: {"arg": element["imagelink"]},
+          ),
+          child: CardInfo(
+            imageLink: element["imagelink"],
+            productname: element["productname"],
+            productdetails: element["productdetails"],
+            price: element["Price"],
+          ),
+        ),
+      );
+    }
+    return staggeredList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,22 +117,12 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: StaggeredGridView.countBuilder(
+            child: StaggeredGridView.count(
               crossAxisCount: 4,
-              itemCount: cardlist2.length,
+              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.all(15),
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () => Navigator.pushNamed(context, "/productscreen"),
-                  child: CardInfo(
-                    imageLink: cardlist2[index]["imagelink"],
-                    productname: cardlist2[index]["productname"],
-                    productdetails: cardlist2[index]["productdetails"],
-                    price: cardlist2[index]["Price"],
-                  ),
-                );
-              },
-              staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+              children: buildStaggered(context),
+              staggeredTiles: staggeredTile,
               // StaggeredTile.count(2, index.isEven ? 2 : 1),
               mainAxisSpacing: 30.0,
               crossAxisSpacing: 30.0,

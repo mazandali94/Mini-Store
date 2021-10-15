@@ -19,7 +19,7 @@ class Task2 extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         "/": (context) => const HomeScreen(),
-        "/productscreen": (context) => const ProductScreen()
+        "/productscreen": (context) => ProductScreen()
       },
     );
   }

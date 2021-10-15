@@ -16,7 +16,7 @@ class CardInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(40),
+      borderRadius: BorderRadius.circular(25),
       child: Container(
         height: 400,
         width: 200,
@@ -34,17 +34,17 @@ class CardInfo extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Text(
               productname,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
             child: Text(
               productdetails,
-              style: TextStyle(fontSize: 15, color: Colors.grey),
+              style: const TextStyle(fontSize: 15, color: Colors.grey),
             ),
           ),
           Padding(
